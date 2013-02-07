@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">Torch</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Torch</string>
+    <string name="Torch">Torch</string>
+
+</resources>
