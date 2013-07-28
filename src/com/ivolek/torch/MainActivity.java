@@ -1,13 +1,11 @@
-package com.example.torch;
+package com.ivolek.torch;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
-import android.hardware.Camera.Parameters;
 import android.os.Bundle;
 import android.view.WindowManager;
 
@@ -19,12 +17,16 @@ public class MainActivity extends Activity
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
+		final MainActivity me = this;
+		Intent service = new Intent(me, FlashlightService.class);
+		me.startService(service); 		
+		
 		setContentView(R.layout.activity_main);
-		camera = Camera.open();
-		Parameters p = camera.getParameters();
-		p.setFlashMode(Parameters.FLASH_MODE_TORCH);
-		camera.setParameters(p);
-		camera.startPreview();
+//		camera = Camera.open();
+//		Parameters p = camera.getParameters();
+//		p.setFlashMode(Parameters.FLASH_MODE_TORCH);
+//		camera.setParameters(p);
+//		camera.startPreview();
 		super.onCreate(savedInstanceState);
 		//getWindow().addFlags(PowerManager.PARTIAL_WAKE_LOCK);
 		//Scherm aanblijven.
@@ -42,8 +44,9 @@ public class MainActivity extends Activity
 					Thread.sleep(600000);
 				}
 				catch(Exception e){}
-				camera.release();
 				lockDevice();
+				Intent service = new Intent(me, FlashlightService.class);
+				me.stopService(service); 
 				System.exit(0);
 			}
 		}.start();
@@ -56,19 +59,21 @@ public class MainActivity extends Activity
 	{
 		// TODO Auto-generated method stub;
 		super.onBackPressed();
-		camera.release();
+
 		lockDevice();
+		Intent service = new Intent(this, FlashlightService.class);
+		this.stopService(service); 
 	}
 
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		camera.release();
 
-		lockDevice();
+//		lockDevice();
+		Intent service = new Intent(this, FlashlightService.class);
+		this.stopService(service); 
 	}   
-
 	
 	protected static final int REQUEST_ENABLE = 0;
 	DevicePolicyManager devicePolicyManager;

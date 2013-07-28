@@ -1,4 +1,4 @@
-package com.example.torch;
+package com.ivolek.torch;
 
 import android.app.admin.DeviceAdminReceiver;
 
