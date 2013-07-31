@@ -8,6 +8,7 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -23,6 +24,7 @@
             android:label="@string/title_activity_main"
             android:screenOrientation="nosensor" >
             <intent-filter>
+                <action android:name="destroy" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
